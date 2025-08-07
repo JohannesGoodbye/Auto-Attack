@@ -1,0 +1,4 @@
+accessWidener v2  named
+
+accessible class net/minecraft/client/gui/components/EditBox
+accessible field net/minecraft/client/gui/components/EditBox suggestion Ljava/lang/String;

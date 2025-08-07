@@ -1,0 +1,45 @@
+modLoader = "javafml"
+loaderVersion = "[9,)"
+#issueTrackerURL = ""
+license = "MIT"
+
+[[mods]]
+modId = "auto_attack"
+version = "${version}"
+displayName = "${mod_name}"
+displayURL = "https://john-adept.netlify.app/mods/auto_attack.html"
+authors = "${mod_authors}"
+description = '''
+${mod_description}
+'''
+logoFile = "assets/auto_attack/icon_large.png"
+clientOnly = true
+accessTransformer = "accesstransformer.cfg"
+
+[[dependencies.auto_attack]]
+modId = "neoforge"
+type = "required"
+versionRange = "[21.7,)"
+ordering = "NONE"
+side = "BOTH"
+
+[[dependencies.auto_attack]]
+modId = "minecraft"
+type = "required"
+versionRange = "[1.21.7,)"
+ordering = "NONE"
+side = "BOTH"
+
+#[[dependencies.auto_attack]]
+#modId = "architectury"
+#type = "required"
+#versionRange = "[17.0.6,)"
+#ordering = "AFTER"
+#side = "BOTH"
+
+[[suggests]]
+modId = "cloth-config"
+versionRange = "*"
+
+[[mixins]]
+config = "auto_attack.mixins.json"
