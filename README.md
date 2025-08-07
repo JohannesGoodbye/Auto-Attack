@@ -6,7 +6,7 @@ Minecraft mod that automates attacking entities in front of the player based on 
 
 ## Features
 - Hits mobs that are within reach and at the crosshair
-- Highly customizable config accessable with [Cloth Config API](https://modrinth.com/mod/cloth-config) (+ [Mod Menu](https://modrinth.com/mods/modmenu) on Fabric)
+- Highly customizable config accessable with [Cloth Config API](https://modrinth.com/mod/cloth-config) (+ [Mod Menu](https://modrinth.com/mod/modmenu) on Fabric)
 - Rotation mode to cover a larger hit area.
 - Item breaking prevention
 - Customizable entity whitelist and blacklist
