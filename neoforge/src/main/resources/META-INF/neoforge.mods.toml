@@ -1,6 +1,7 @@
 modLoader = "javafml"
 loaderVersion = "[9,)"
 issueTrackerURL = "https://github.com/JohannesGoodbye/Auto-Attack/issues"
+license = "MIT"
 
 [[mods]]
 modId = "auto_attack"
@@ -9,7 +10,6 @@ displayName = "${mod_name}"
 displayURL = "https://john-adept.netlify.app/mods/auto_attack.html"
 logoFile = "assets/auto_attack/icon_large.png"
 authors = "${mod_authors}"
-license = "MIT"
 description = '''
 ${mod_description}
 '''
