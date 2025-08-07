@@ -9,7 +9,8 @@
   ],
   "contact": {
     "homepage": "https://john-adept.netlify.app/mods/auto_attack.html",
-    "sources": ""
+    "sources": "https://github.com/JohannesGoodbye/Auto-Attack.git",
+    "issues": "https://github.com/JohannesGoodbye/Auto-Attack/issues"
   },
   "license": "${mod_license}",
   "icon": "assets/auto_attack/icon.png",
