@@ -100,7 +100,7 @@ public final class AutoAttackClient {
 
     public static void init() {
         AutoAttackConfig.setConfigPath(AutoAttackVersionDifferenceManager.getConfigDirectory().resolve("auto_attack.json"));
-        AutoAttackConfig.load();
+        AutoAttackConfig.loadInitially();
 
         if (AutoAttackVersionDifferenceManager.isModLoaded("auto-attack")) {
             String fileName = AutoAttackVersionDifferenceManager.getModJarFileName("auto-attack");
