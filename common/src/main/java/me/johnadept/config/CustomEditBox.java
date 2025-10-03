@@ -4,6 +4,7 @@ import me.johnadept.AutoAttackClient;
 import me.shedaniel.clothconfig2.gui.entries.StringListListEntry;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.components.EditBox;
+import net.minecraft.client.input.KeyEvent;
 import net.minecraft.network.chat.Component;
 import org.lwjgl.glfw.GLFW;
 
@@ -24,10 +25,10 @@ public class CustomEditBox extends EditBox {
     }
 
     @Override
-    public boolean keyPressed(int keyCode, int scanCode, int modifiers) {
-        if (keyCode == GLFW.GLFW_KEY_TAB && (modifiers & GLFW.GLFW_MOD_SHIFT) != 0) {
+    public boolean keyPressed(KeyEvent keyEvent) {
+        if (keyEvent.key() == GLFW.GLFW_KEY_TAB && (keyEvent.modifiers() & GLFW.GLFW_MOD_SHIFT) != 0) {
             if (AutoAttackClient.handleShiftTabLogic(this)) return true;
-        } else if (keyCode == GLFW.GLFW_KEY_TAB && AutoAttackClient.handleTabLogic(this)) return true;
-        return super.keyPressed(keyCode, scanCode, modifiers);
+        } else if (keyEvent.key() == GLFW.GLFW_KEY_TAB && AutoAttackClient.handleTabLogic(this)) return true;
+        return super.keyPressed(keyEvent);
     }
 }

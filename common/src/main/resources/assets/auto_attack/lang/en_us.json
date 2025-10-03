@@ -1,5 +1,5 @@
 {
-  "key.categories.auto_attack": "Auto Attack",
+  "key.category.auto_attack.auto_attack": "Auto Attack",
   "key.auto_attack.toggleAttack": "Toggle Auto Attack",
   "key.auto_attack.toggleRotation": "Toggle Rotation Mode",
   "gui.auto_attack.autoAttackPrefix": "Auto Attack: %s",
