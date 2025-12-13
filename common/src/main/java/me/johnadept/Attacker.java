@@ -7,7 +7,7 @@ import net.minecraft.client.Minecraft;
 import net.minecraft.client.player.LocalPlayer;
 import net.minecraft.core.registries.BuiltInRegistries;
 import net.minecraft.network.chat.Component;
-import net.minecraft.resources.ResourceLocation;
+import net.minecraft.resources.Identifier;
 import net.minecraft.tags.ItemTags;
 import net.minecraft.world.InteractionHand;
 import net.minecraft.world.entity.Entity;
@@ -51,7 +51,7 @@ public class Attacker {
         if (entity instanceof ArmorStand && !isWeapon(weapon)) return false;
         if (isShielding(player)) return false;
 
-        ResourceLocation id = BuiltInRegistries.ENTITY_TYPE.getKey(entity.getType());
+        Identifier id = BuiltInRegistries.ENTITY_TYPE.getKey(entity.getType());
         if (config.entityBlacklist.contains(id.toString())) return false;
         if (config.entityWhitelist.contains(id.toString())) return true;
 

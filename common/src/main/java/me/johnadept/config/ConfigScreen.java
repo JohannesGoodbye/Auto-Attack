@@ -9,7 +9,7 @@ import me.shedaniel.clothconfig2.gui.entries.BooleanListEntry;
 import net.minecraft.client.gui.screens.Screen;
 import net.minecraft.core.registries.BuiltInRegistries;
 import net.minecraft.network.chat.Component;
-import net.minecraft.resources.ResourceLocation;
+import net.minecraft.resources.Identifier;
 
 import java.util.Objects;
 import java.util.Set;
@@ -137,33 +137,33 @@ public class ConfigScreen {
 //            Set<String> validEntityIds = BuiltInRegistries.ENTITY_TYPE.entrySet().stream()
 //                    .map(entry -> BuiltInRegistries.ENTITY_TYPE.getKey(entry.getValue()))
 //                    .filter(Objects::nonNull)
-//                    .map(ResourceLocation::toString)
+//                    .map(Identifier::toString)
 //                    .filter(id -> !id.equals("minecraft:player"))
 //                    .sorted()
 //                    .collect(Collectors.toCollection(LinkedHashSet::new));
 //
-//            DropdownMenuBuilder<ResourceLocation> resourceLocationDropdown = entryBuilder.startDropdownMenu(
+//            DropdownMenuBuilder<Identifier> IdentifierDropdown = entryBuilder.startDropdownMenu(
 //                    Component.literal("Entity Selector"),
-//                    ResourceLocation.fromNamespaceAndPath("minecraft", "horse"),                        // ResourceLocation
-//                    ResourceLocation::tryParse,
+//                    Identifier.fromNamespaceAndPath("minecraft", "horse"),                        // Identifier
+//                    Identifier::tryParse,
 //                    rl -> Component.literal(rl.toString())
 //            );
 //
-//            Set<ResourceLocation> validEntityResourceLocations = BuiltInRegistries.ENTITY_TYPE.entrySet().stream()
-//                    .map(entry -> BuiltInRegistries.ENTITY_TYPE.getKey(entry.getValue()))  // Get ResourceLocation key for each EntityType
+//            Set<Identifier> validEntityIdentifiers = BuiltInRegistries.ENTITY_TYPE.entrySet().stream()
+//                    .map(entry -> BuiltInRegistries.ENTITY_TYPE.getKey(entry.getValue()))  // Get Identifier key for each EntityType
 //                    .filter(rl -> !rl.getPath().equals("player"))             // Filter out player if you want
 //                    .collect(Collectors.toCollection(TreeSet::new));
 //
-//            resourceLocationDropdown.setSelections(validEntityResourceLocations)
+//            IdentifierDropdown.setSelections(validEntityIdentifiers)
 //                    .setSuggestionMode(true);
 
-//            general.addEntry(resourceLocationDropdown.build());
+//            general.addEntry(IdentifierDropdown.build());
 
 // 1. Prepare valid entity IDs
         Set<String> validEntityIds = BuiltInRegistries.ENTITY_TYPE.entrySet().stream()
                 .map(entry -> BuiltInRegistries.ENTITY_TYPE.getKey(entry.getValue()))
                 .filter(Objects::nonNull)
-                .map(ResourceLocation::toString)
+                .map(Identifier::toString)
                 .filter(id -> !id.equals("minecraft:player"))
                 .sorted()
                 .collect(Collectors.toCollection(LinkedHashSet::new));
@@ -204,38 +204,38 @@ public class ConfigScreen {
                 }
         );
 // 2. Clone current config list or use default
-        List<ResourceLocation> initialWhitelist = config.entityWhitelist != null
+        List<Identifier> initialWhitelist = config.entityWhitelist != null
                 ? new ArrayList<>(config.entityWhitelist)
-                : new ArrayList<>(List.of(ResourceLocation.fromNamespaceAndPath("minecraft", "zombie")));
+                : new ArrayList<>(List.of(Identifier.fromNamespaceAndPath("minecraft", "zombie")));
 
 // 3. Create top cell creator (for dropdown UI)
-        Function<ResourceLocation, ModifiedDropdownBoxEntry.SelectionTopCellElement<ResourceLocation>> topCellCreator =
+        Function<Identifier, ModifiedDropdownBoxEntry.SelectionTopCellElement<Identifier>> topCellCreator =
                 rl -> ModifiedTopCellElementBuilder.of(
                         rl,
-                        ResourceLocation::tryParse,
+                        Identifier::tryParse,
                         id -> Component.literal(id.toString())
                 );
 
 // 4. Build the dropdown list
-        DropdownListBuilder<ResourceLocation> dropdownList = DropdownListBuilder.startDropdownList(
+        DropdownListBuilder<Identifier> dropdownList = DropdownListBuilder.startDropdownList(
                 Component.translatable("menu.auto_attack.config.whitelist"),
                 initialWhitelist,
                 topCellCreator,
                 new ModifiedDropdownBoxEntry.DefaultSelectionCellCreator<>()
         );
 
-        dropdownList.setDefaultEntryValue(ResourceLocation.fromNamespaceAndPath("minecraft","horse"));
+        dropdownList.setDefaultEntryValue(Identifier.fromNamespaceAndPath("minecraft","horse"));
         dropdownList.setSelections(validEntityIds);
 
         general.addEntry(dropdownList.build());
 */
 
-        Set<ResourceLocation> entityBlacklistIds = BuiltInRegistries.ENTITY_TYPE.entrySet().stream()
+        Set<Identifier> entityBlacklistIds = BuiltInRegistries.ENTITY_TYPE.entrySet().stream()
                 .map(entry -> BuiltInRegistries.ENTITY_TYPE.getKey(entry.getValue()))
                 .filter(Objects::nonNull)
                 .collect(Collectors.toCollection(TreeSet::new));
 
-        Set<ResourceLocation> entityWhitelistIds = entityBlacklistIds.stream()
+        Set<Identifier> entityWhitelistIds = entityBlacklistIds.stream()
                 .filter(id -> AutoAttackClient.ENTITY_ID_WHITELIST_VALIDATOR.apply(id.toString()).isEmpty())
                 .collect(Collectors.toCollection(TreeSet::new));
 
@@ -246,9 +246,9 @@ public class ConfigScreen {
                 .setDisplayRequirement(Requirement.isTrue(enable))
                 .setInsertInFront(true)
                 .setCellErrorSupplier(AutoAttackClient.ENTITY_ID_WHITELIST_VALIDATOR)
-                .setCreateNewInstance(entry -> new CustomStringListCell("", entry, entityWhitelistIds.stream().map(ResourceLocation::toString).toList(), AutoAttackClient::isValidResourceLocationText))
+                .setCreateNewInstance(entry -> new CustomStringListCell("", entry, entityWhitelistIds.stream().map(Identifier::toString).toList(), AutoAttackClient::isValidIdentifierText))
                 .setSaveConsumer(newList -> config.entityWhitelist = newList);
-        general.addEntry(whitelistBuilder.buildCustom(entityWhitelistIds.stream().map(ResourceLocation::toString).collect(Collectors.toList()), AutoAttackClient::isValidResourceLocationText));
+        general.addEntry(whitelistBuilder.buildCustom(entityWhitelistIds.stream().map(Identifier::toString).collect(Collectors.toList()), AutoAttackClient::isValidIdentifierText));
 
         CustomStringListBuilder blackListBuilder = new CustomStringListBuilder(entryBuilder, Component.translatable("menu.auto_attack.config.blacklist"), config.entityBlacklist);
         blackListBuilder
@@ -257,9 +257,9 @@ public class ConfigScreen {
                 .setDisplayRequirement(Requirement.isTrue(enable))
                 .setInsertInFront(true)
                 .setCellErrorSupplier(AutoAttackClient.ENTITY_ID_BLACKLIST_VALIDATOR)
-                .setCreateNewInstance(entry -> new CustomStringListCell("", entry, entityBlacklistIds.stream().map(ResourceLocation::toString).toList(), AutoAttackClient::isValidResourceLocationText))
+                .setCreateNewInstance(entry -> new CustomStringListCell("", entry, entityBlacklistIds.stream().map(Identifier::toString).toList(), AutoAttackClient::isValidIdentifierText))
                 .setSaveConsumer(newList -> config.entityBlacklist = newList);
-        general.addEntry(blackListBuilder.buildCustom(entityBlacklistIds.stream().map(ResourceLocation::toString).collect(Collectors.toList()), AutoAttackClient::isValidResourceLocationText));
+        general.addEntry(blackListBuilder.buildCustom(entityBlacklistIds.stream().map(Identifier::toString).collect(Collectors.toList()), AutoAttackClient::isValidIdentifierText));
 
 // Backup Code
 /*
