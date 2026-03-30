@@ -1,5 +1,5 @@
 plugins {
-    id 'dev.architectury.loom' version '1.13-SNAPSHOT' apply false
+    id 'dev.architectury.loom' version '1.14-SNAPSHOT' apply false
     id 'architectury-plugin' version '3.4-SNAPSHOT'
     id 'com.gradleup.shadow' version '8.3.6' apply false
 }
@@ -38,16 +38,8 @@ subprojects {
         // for more information about repositories.
     }
 
-    loom {
-        silentMojangMappingsLicense()
-    }
-
     dependencies {
         minecraft "net.minecraft:minecraft:$rootProject.minecraft_version"
-        mappings loom.layered() {
-            officialMojangMappings()
-//            parchment("org.parchmentmc.data:parchment-${rootProject.minecraft_version}:YYYY.MM.DD@zip")
-        }
     }
 
     java {
@@ -56,12 +48,12 @@ subprojects {
         // If you remove this line, sources will not be generated.
         withSourcesJar()
 
-        sourceCompatibility = JavaVersion.VERSION_21
-        targetCompatibility = JavaVersion.VERSION_21
+        sourceCompatibility = JavaVersion.VERSION_25
+        targetCompatibility = JavaVersion.VERSION_25
     }
 
     tasks.withType(JavaCompile).configureEach {
-        it.options.release.set(21)
+        it.options.release.set(25)
     }
 
     // Configure Maven publishing.
