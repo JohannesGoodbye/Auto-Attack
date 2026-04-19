@@ -3,7 +3,7 @@ package me.johnadept.fabric;
 import com.mojang.blaze3d.platform.InputConstants;
 import me.johnadept.AutoAttackClient;
 import me.johnadept.ModKeyBindings;
-import net.fabricmc.fabric.api.client.keybinding.v1.KeyBindingHelper;
+import net.fabricmc.fabric.api.client.keymapping.v1.KeyMappingHelper;
 import net.minecraft.client.KeyMapping;
 import net.minecraft.resources.Identifier;
 import org.lwjgl.glfw.GLFW;
@@ -12,7 +12,7 @@ public class ModKeyBindingsImpl {
     public static void register() {
         ModKeyBindings.CATEGORY_AUTO_ATTACK = KeyMapping.Category.register(Identifier.fromNamespaceAndPath(AutoAttackClient.MOD_ID, "auto_attack"));
 
-        ModKeyBindings.toggleAttack = KeyBindingHelper.registerKeyBinding(
+        ModKeyBindings.toggleAttack = KeyMappingHelper.registerKeyMapping(
                 new KeyMapping(
                         "key.auto_attack.toggleAttack",
                         InputConstants.Type.KEYSYM,
@@ -21,7 +21,7 @@ public class ModKeyBindingsImpl {
                 )
         );
 
-        ModKeyBindings.toggleRotation = KeyBindingHelper.registerKeyBinding(
+        ModKeyBindings.toggleRotation = KeyMappingHelper.registerKeyMapping(
                 new KeyMapping(
                         "key.auto_attack.toggleRotation",
                         InputConstants.Type.KEYSYM,

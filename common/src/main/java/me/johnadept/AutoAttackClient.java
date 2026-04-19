@@ -1,7 +1,9 @@
 package me.johnadept;
 
 import me.johnadept.config.AutoAttackConfig;
+import me.johnadept.config.MessageDisplayMode;
 import net.minecraft.client.gui.components.EditBox;
+import net.minecraft.client.player.LocalPlayer;
 import net.minecraft.core.registries.BuiltInRegistries;
 import net.minecraft.network.chat.Component;
 import net.minecraft.resources.Identifier;
@@ -96,6 +98,15 @@ public final class AutoAttackClient {
     private static final Pattern PARTIAL_IDENTIFIER = Pattern.compile("^[a-z0-9._-]*(:[a-z0-9._/-]*)?$");
     public static boolean isValidIdentifierText(@NotNull String text) {
         return PARTIAL_IDENTIFIER.matcher(text).matches();
+    }
+
+    public static void sendMessage(LocalPlayer player, Component message) {
+        AutoAttackConfig config = AutoAttackConfig.get();
+        if (config.displayMode == MessageDisplayMode.ACTION_BAR) {
+            player.sendOverlayMessage(message);
+        } else {
+            player.sendSystemMessage(message);
+        }
     }
 
     public static void init() {

@@ -1,7 +1,6 @@
 package me.johnadept;
 
 import me.johnadept.config.AutoAttackConfig;
-import me.johnadept.config.MessageDisplayMode;
 import net.minecraft.ChatFormatting;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.player.LocalPlayer;
@@ -18,7 +17,7 @@ public class Rotater {
         AutoAttackConfig config = AutoAttackConfig.get();
         if ((player.getDirection() == Direction.DOWN || player.getDirection() == Direction.UP) && config.autoAlignYaw) {
             if (!AutoAttackClient.rotationModeEnabled) {
-                player.displayClientMessage(Component.translatable("gui.auto_attack.rotationModePrefix", Component.translatable("gui.auto_attack.invalidFacing").withStyle(ChatFormatting.RED)), config.displayMode == MessageDisplayMode.ACTION_BAR);
+                AutoAttackClient.sendMessage(player, Component.translatable("gui.auto_attack.rotationModePrefix", Component.translatable("gui.auto_attack.invalidFacing").withStyle(ChatFormatting.RED)));
                 return;
             }
         }
@@ -57,13 +56,12 @@ public class Rotater {
             rotationProgress = 0f;
             rotatingRight = true;
 
-            player.displayClientMessage(Component.translatable("gui.auto_attack.rotationModePrefix",
-                    suffix == null ? Component.translatable("gui.auto_attack.enabled").withStyle(ChatFormatting.GREEN).append(Component.literal(", ").withStyle(ChatFormatting.WHITE)).append(Component.literal(String.valueOf(config.rotationAngle)).withStyle(ChatFormatting.AQUA)).append(Component.literal("°").withStyle(ChatFormatting.AQUA)) :
-                            Component.translatable("gui.auto_attack.direction." + suffix).withStyle(ChatFormatting.GOLD).append(Component.literal(", ").withStyle(ChatFormatting.WHITE)).append(Component.literal(String.valueOf(config.rotationAngle)).withStyle(ChatFormatting.AQUA)).append(Component.literal("°").withStyle(ChatFormatting.AQUA))
-                    ),
-                    config.displayMode == MessageDisplayMode.ACTION_BAR
+            AutoAttackClient.sendMessage(player, Component.translatable("gui.auto_attack.rotationModePrefix",
+                            suffix == null ? Component.translatable("gui.auto_attack.enabled").withStyle(ChatFormatting.GREEN).append(Component.literal(", ").withStyle(ChatFormatting.WHITE)).append(Component.literal(String.valueOf(config.rotationAngle)).withStyle(ChatFormatting.AQUA)).append(Component.literal("°").withStyle(ChatFormatting.AQUA)) :
+                                    Component.translatable("gui.auto_attack.direction." + suffix).withStyle(ChatFormatting.GOLD).append(Component.literal(", ").withStyle(ChatFormatting.WHITE)).append(Component.literal(String.valueOf(config.rotationAngle)).withStyle(ChatFormatting.AQUA)).append(Component.literal("°").withStyle(ChatFormatting.AQUA))
+                    )
             );
-        } else player.displayClientMessage(Component.translatable("gui.auto_attack.rotationModePrefix", Component.translatable("gui.auto_attack.disabled").withStyle(ChatFormatting.RED)), config.displayMode == MessageDisplayMode.ACTION_BAR);
+        } else AutoAttackClient.sendMessage(player, Component.translatable("gui.auto_attack.rotationModePrefix", Component.translatable("gui.auto_attack.disabled").withStyle(ChatFormatting.RED)));
     }
 
     public static void tick(Minecraft mc) {

@@ -1,7 +1,6 @@
 package me.johnadept;
 
 import me.johnadept.config.AutoAttackConfig;
-import me.johnadept.config.MessageDisplayMode;
 import net.minecraft.ChatFormatting;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.player.LocalPlayer;
@@ -30,7 +29,7 @@ public class Attacker {
         AutoAttackConfig config = AutoAttackConfig.get();
         ItemStack mainHand = player.getMainHandItem();
         if (mainHand.isDamageableItem() && config.disableOnLowDurability && mainHand.getMaxDamage() - mainHand.getDamageValue() <= config.durabilityThreshold) {
-            player.displayClientMessage(Component.translatable("gui.auto_attack.autoAttackPrefix", Component.translatable("gui.auto_attack.disabledDueDurability").withStyle(ChatFormatting.RED)), config.displayMode == MessageDisplayMode.ACTION_BAR);
+            AutoAttackClient.sendMessage(player, Component.translatable("gui.auto_attack.autoAttackPrefix", Component.translatable("gui.auto_attack.disabledDueDurability").withStyle(ChatFormatting.RED)));
             AutoAttackClient.autoAttackEnabled = false;
             return;
         }
@@ -63,7 +62,7 @@ public class Attacker {
     }
 
     private static boolean isShielding(Player player) {
-        return player.isUsingItem() && player.getUseItem().getItem() instanceof ShieldItem;
+        return player.isUsingItem() && player.getUseItem().getItem() instanceof ShieldItem; 
     }
 
     private static boolean isWeapon(ItemStack stack) {
