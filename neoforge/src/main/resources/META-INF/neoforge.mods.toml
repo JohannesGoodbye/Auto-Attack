@@ -19,14 +19,14 @@ accessTransformer = "accesstransformer.cfg"
 [[dependencies.auto_attack]]
 modId = "neoforge"
 type = "required"
-versionRange = "[26.1.0-beta,)"
+versionRange = "[26.2.0.0-beta,)"
 ordering = "NONE"
 side = "BOTH"
 
 [[dependencies.auto_attack]]
 modId = "minecraft"
 type = "required"
-versionRange = "[26.1,)"
+versionRange = "[26.2,)"
 ordering = "NONE"
 side = "BOTH"
 

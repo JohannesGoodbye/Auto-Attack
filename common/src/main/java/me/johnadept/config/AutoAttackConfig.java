@@ -4,12 +4,13 @@ import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 import me.johnadept.AutoAttackClient;
 import net.minecraft.core.registries.BuiltInRegistries;
-import net.minecraft.world.entity.EntityType;
+import net.minecraft.world.entity.EntityTypes;
 
 import java.io.*;
 import java.nio.file.*;
 import java.util.ArrayList;
 import java.util.List;
+
 //TODO: Failsafe
 public class AutoAttackConfig {
     public boolean enableMod = true;
@@ -25,7 +26,7 @@ public class AutoAttackConfig {
     public MessageDisplayMode displayMode = MessageDisplayMode.ACTION_BAR;
     public List<String> entityWhitelist = new ArrayList<>();
     public List<String> entityBlacklist = List.of(
-            BuiltInRegistries.ENTITY_TYPE.getKey(EntityType.ITEM_FRAME).toString()
+            BuiltInRegistries.ENTITY_TYPE.getKey(EntityTypes.ITEM_FRAME).toString()
     );
 
     private static final Gson GSON = new GsonBuilder().setPrettyPrinting().create();

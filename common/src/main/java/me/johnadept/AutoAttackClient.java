@@ -7,11 +7,12 @@ import net.minecraft.client.player.LocalPlayer;
 import net.minecraft.core.registries.BuiltInRegistries;
 import net.minecraft.network.chat.Component;
 import net.minecraft.resources.Identifier;
-import net.minecraft.world.entity.EntityType;
+import net.minecraft.world.entity.EntityTypes;
 import org.jetbrains.annotations.NotNull;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
+import java.util.Objects;
 import java.util.Optional;
 import java.util.function.Function;
 import java.util.regex.Pattern;
@@ -49,7 +50,7 @@ public final class AutoAttackClient {
             return baseValidation;
         }
         Identifier id = Identifier.tryParse(str);
-        if (id.equals(BuiltInRegistries.ENTITY_TYPE.getKey(EntityType.PLAYER))) {
+        if (Objects.equals(id, BuiltInRegistries.ENTITY_TYPE.getKey(EntityTypes.PLAYER))) {
             return Optional.of(Component.translatable("menu.auto_attack.config.entity_id.disallowed_player"));
         }
 
