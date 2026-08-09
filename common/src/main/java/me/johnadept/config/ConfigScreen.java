@@ -6,17 +6,21 @@ import me.shedaniel.clothconfig2.api.ConfigCategory;
 import me.shedaniel.clothconfig2.api.ConfigEntryBuilder;
 import me.shedaniel.clothconfig2.api.Requirement;
 import me.shedaniel.clothconfig2.gui.entries.BooleanListEntry;
+import me.shedaniel.clothconfig2.gui.entries.IntegerListEntry;
 import net.minecraft.client.gui.screens.Screen;
 import net.minecraft.core.registries.BuiltInRegistries;
 import net.minecraft.network.chat.Component;
 import net.minecraft.resources.ResourceLocation;
 
 import java.util.Objects;
+import java.util.Optional;
 import java.util.Set;
 import java.util.TreeSet;
 import java.util.stream.Collectors;
 
 public class ConfigScreen {
+
+    private static final int MAX_HIT_DELAY_TICKS = 100;
 
     public static Screen create(Screen parent) {
         AutoAttackConfig config = AutoAttackConfig.get();
@@ -79,6 +83,42 @@ public class ConfigScreen {
                 .setDisplayRequirement(Requirement.isTrue(enable))
                 .setRequirement(Requirement.isTrue(disableOnLowDurability))
                 .setSaveConsumer(newValue -> config.durabilityThreshold = newValue)
+                .build()
+        );
+
+        BooleanListEntry enableHitDelay = entryBuilder
+                .startBooleanToggle(Component.translatable("menu.auto_attack.config.enableHitDelay"), config.enableHitDelay)
+                .setTooltip(Component.translatable("menu.auto_attack.config.enableHitDelay.tooltip"))
+                .setDefaultValue(defaultConfig.enableHitDelay)
+                .setDisplayRequirement(Requirement.isTrue(enable))
+                .setSaveConsumer(newValue -> config.enableHitDelay = newValue)
+                .build();
+        general.addEntry(enableHitDelay);
+
+        IntegerListEntry minHitDelay = entryBuilder
+                .startIntField(Component.translatable("menu.auto_attack.config.minHitDelay"), config.minHitDelay)
+                .setTooltip(Component.translatable("menu.auto_attack.config.minHitDelay.tooltip"))
+                .setMin(0)
+                .setMax(MAX_HIT_DELAY_TICKS)
+                .setDefaultValue(defaultConfig.minHitDelay)
+                .setDisplayRequirement(Requirement.isTrue(enable))
+                .setRequirement(Requirement.isTrue(enableHitDelay))
+                .setSaveConsumer(newValue -> config.minHitDelay = newValue)
+                .build();
+        general.addEntry(minHitDelay);
+
+        general.addEntry(entryBuilder
+                .startIntField(Component.translatable("menu.auto_attack.config.maxHitDelay"), config.maxHitDelay)
+                .setTooltip(Component.translatable("menu.auto_attack.config.maxHitDelay.tooltip"))
+                .setMin(0)
+                .setMax(MAX_HIT_DELAY_TICKS)
+                .setErrorSupplier(newValue -> newValue < minHitDelay.getValue()
+                        ? Optional.of(Component.translatable("menu.auto_attack.config.maxHitDelay.below_min"))
+                        : Optional.empty())
+                .setDefaultValue(defaultConfig.maxHitDelay)
+                .setDisplayRequirement(Requirement.isTrue(enable))
+                .setRequirement(Requirement.isTrue(enableHitDelay))
+                .setSaveConsumer(newValue -> config.maxHitDelay = newValue)
                 .build()
         );
 
