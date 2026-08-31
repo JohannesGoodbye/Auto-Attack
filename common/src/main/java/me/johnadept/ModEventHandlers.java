@@ -26,8 +26,10 @@ public class ModEventHandlers {
             AutoAttackClient.autoAttackEnabled = false;
         }
 
-        if (AutoAttackClient.autoAttackEnabled && mc.player.getAttackStrengthScale(0) == 1.0f) {
-            Attacker.tryAttack(mc);
+        if (AutoAttackClient.autoAttackEnabled) {
+            Attacker.tick(mc);
+        } else {
+            Attacker.resetHitDelay();
         }
     }
 }
