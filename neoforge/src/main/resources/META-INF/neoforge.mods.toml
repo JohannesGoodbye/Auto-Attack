@@ -1,5 +1,5 @@
 modLoader = "javafml"
-loaderVersion = "[9,)"
+loaderVersion = "[1,)"
 issueTrackerURL = "https://github.com/JohannesGoodbye/Auto-Attack/issues"
 license = "MIT"
 
@@ -19,14 +19,14 @@ accessTransformer = "accesstransformer.cfg"
 [[dependencies.auto_attack]]
 modId = "neoforge"
 type = "required"
-versionRange = "[21.7,)"
+versionRange = "[21.1,)"
 ordering = "NONE"
 side = "BOTH"
 
 [[dependencies.auto_attack]]
 modId = "minecraft"
 type = "required"
-versionRange = "[1.21.7,)"
+versionRange = "[1.21.1,)"
 ordering = "NONE"
 side = "BOTH"
 
