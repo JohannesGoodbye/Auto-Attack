@@ -36,6 +36,7 @@ public class ConfigScreen {
 
         BooleanListEntry enable = entryBuilder
                 .startBooleanToggle(Component.translatable("menu.auto_attack.config.enableMod"), config.enableMod)
+                .setTooltip(Component.translatable("menu.auto_attack.config.enableMod.tooltip"))
                 .setDefaultValue(defaultConfig.enableMod)
                 .setSaveConsumer(newValue -> config.enableMod = newValue)
                 .build();
@@ -384,5 +385,5 @@ public class ConfigScreen {
         builder.setSavingRunnable(AutoAttackConfig::save);
 
         return builder.build();
-    };
+    }
 }
