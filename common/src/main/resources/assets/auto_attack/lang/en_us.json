@@ -16,6 +16,7 @@
   "menu.auto_attack.config.title": "Auto Attack Config",
   "menu.auto_attack.config.category.general": "General",
   "menu.auto_attack.config.enableMod": "Enable Mod",
+  "menu.auto_attack.config.enableMod.tooltip": "Enables or disables all Auto Attack features. \nThis does not toggle the Attacker. \nUse the Attacker keybinding to enable or disable it.",
   "menu.auto_attack.config.disableOnLowDurability": "Disable on Low Durability",
   "menu.auto_attack.config.durabilityThreshold": "Durability Threshold",
   "menu.auto_attack.config.durabilityThreshold.tooltip": "Disables attacking when weapon durability is at or below this value.",
