@@ -18,6 +18,9 @@ public class AutoAttackConfig {
     public boolean attackNonHostile = false;
     public boolean protectTamedMobs = true;
     public boolean attackNonLiving = false;
+    public boolean enableHitDelay = false;
+    public int minHitDelay = 1;
+    public int maxHitDelay = 4;
     public int rotationAngle = 30;
     public int rotationSpeed = 3;
     public boolean autoAlignYaw = true;
