@@ -29,7 +29,10 @@ public class AutoAttackConfig {
     public MessageDisplayMode displayMode = MessageDisplayMode.ACTION_BAR;
     public List<String> entityWhitelist = new ArrayList<>();
     public List<String> entityBlacklist = List.of(
-            BuiltInRegistries.ENTITY_TYPE.getKey(EntityTypes.ITEM_FRAME).toString()
+            BuiltInRegistries.ENTITY_TYPE.getKey(EntityTypes.ITEM_FRAME).toString(),
+            BuiltInRegistries.ENTITY_TYPE.getKey(EntityTypes.GLOW_ITEM_FRAME).toString(),
+            BuiltInRegistries.ENTITY_TYPE.getKey(EntityTypes.PAINTING).toString(),
+            BuiltInRegistries.ENTITY_TYPE.getKey(EntityTypes.ARMOR_STAND).toString()
     );
 
     private static final Gson GSON = new GsonBuilder().setPrettyPrinting().create();
