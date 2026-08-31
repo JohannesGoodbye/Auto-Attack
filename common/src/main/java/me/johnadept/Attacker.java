@@ -8,22 +8,20 @@ import net.minecraft.client.player.LocalPlayer;
 import net.minecraft.core.registries.BuiltInRegistries;
 import net.minecraft.network.chat.Component;
 import net.minecraft.resources.ResourceLocation;
-import net.minecraft.tags.ItemTags;
 import net.minecraft.util.RandomSource;
 import net.minecraft.world.InteractionHand;
 import net.minecraft.world.entity.Entity;
 import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.entity.TamableAnimal;
-import net.minecraft.world.entity.decoration.ArmorStand;
 import net.minecraft.world.entity.monster.Monster;
 import net.minecraft.world.entity.player.Player;
-import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.ShieldItem;
 import net.minecraft.world.phys.EntityHitResult;
 import net.minecraft.world.phys.HitResult;
 
 public class Attacker {
+
     private static final RandomSource RANDOM = RandomSource.create();
 
     /** Ticks left before the next hit is allowed, or -1 when no delay is pending. */
@@ -90,7 +88,6 @@ public class Attacker {
         AutoAttackConfig config = AutoAttackConfig.get();
 
         if (entity instanceof Player) return false;
-        if (entity instanceof ArmorStand && !isWeapon(weapon)) return false;
         if (isShielding(player)) return false;
 
         ResourceLocation id = BuiltInRegistries.ENTITY_TYPE.getKey(entity.getType());
@@ -106,10 +103,5 @@ public class Attacker {
 
     private static boolean isShielding(Player player) {
         return player.isUsingItem() && player.getUseItem().getItem() instanceof ShieldItem;
-    }
-
-    private static boolean isWeapon(ItemStack stack) {
-        Item item = stack.getItem();
-        return item.builtInRegistryHolder().is(ItemTags.SWORDS) || item.builtInRegistryHolder().is(ItemTags.AXES);
     }
 }
