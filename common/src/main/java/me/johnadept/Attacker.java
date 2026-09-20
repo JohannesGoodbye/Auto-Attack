@@ -6,6 +6,7 @@ import net.minecraft.client.Minecraft;
 import net.minecraft.client.player.LocalPlayer;
 import net.minecraft.core.registries.BuiltInRegistries;
 import net.minecraft.network.chat.Component;
+import net.minecraft.network.protocol.game.ServerboundPunchPacket;
 import net.minecraft.resources.Identifier;
 import net.minecraft.util.RandomSource;
 import net.minecraft.world.InteractionHand;
@@ -16,6 +17,7 @@ import net.minecraft.world.entity.monster.Monster;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.ShieldItem;
+import net.minecraft.world.item.component.SwingAnimation;
 import net.minecraft.world.phys.EntityHitResult;
 import net.minecraft.world.phys.HitResult;
 
@@ -76,8 +78,17 @@ public class Attacker {
         if (hit instanceof EntityHitResult entityHit) {
             if (!shouldAttack(entityHit.getEntity(), mainHand, player)) return false;
 
+            SwingAnimation attackAnimation = mainHand.getAttackAnimation();
             mc.gameMode.attack(player, entityHit.getEntity());
-            player.swing(InteractionHand.MAIN_HAND);
+
+            player.swing(
+                    InteractionHand.MAIN_HAND,
+                    attackAnimation,
+                    false
+            );
+
+            player.connection.send(ServerboundPunchPacket.INSTANCE);
+
             return true;
         }
         return false;

@@ -6,7 +6,6 @@ import me.johnadept.ModKeyBindings;
 import net.fabricmc.fabric.api.client.keymapping.v1.KeyMappingHelper;
 import net.minecraft.client.KeyMapping;
 import net.minecraft.resources.Identifier;
-import org.lwjgl.glfw.GLFW;
 
 public class ModKeyBindingsImpl {
     public static void register() {
@@ -15,8 +14,8 @@ public class ModKeyBindingsImpl {
         ModKeyBindings.toggleAttack = KeyMappingHelper.registerKeyMapping(
                 new KeyMapping(
                         "key.auto_attack.toggleAttack",
-                        InputConstants.Type.KEYSYM,
-                        GLFW.GLFW_KEY_UNKNOWN,
+                        InputConstants.Type.KEYBOARD,
+                        InputConstants.UNKNOWN.getValue(),
                         ModKeyBindings.CATEGORY_AUTO_ATTACK
                 )
         );
@@ -24,8 +23,8 @@ public class ModKeyBindingsImpl {
         ModKeyBindings.toggleRotation = KeyMappingHelper.registerKeyMapping(
                 new KeyMapping(
                         "key.auto_attack.toggleRotation",
-                        InputConstants.Type.KEYSYM,
-                        GLFW.GLFW_KEY_UNKNOWN,
+                        InputConstants.Type.KEYBOARD,
+                        InputConstants.UNKNOWN.getValue(),
                         ModKeyBindings.CATEGORY_AUTO_ATTACK
                 )
         );

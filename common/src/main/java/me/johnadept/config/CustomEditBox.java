@@ -1,14 +1,12 @@
 package me.johnadept.config;
 
+import com.mojang.blaze3d.platform.InputConstants;
 import me.johnadept.AutoAttackClient;
 import me.shedaniel.clothconfig2.gui.entries.StringListListEntry;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.components.EditBox;
 import net.minecraft.client.input.KeyEvent;
 import net.minecraft.network.chat.Component;
-import net.minecraft.network.chat.Style;
-import net.minecraft.util.FormattedCharSequence;
-import org.lwjgl.glfw.GLFW;
 
 import java.util.function.Predicate;
 
@@ -40,9 +38,9 @@ public class CustomEditBox extends EditBox {
 
     @Override
     public boolean keyPressed(KeyEvent keyEvent) {
-        if (keyEvent.key() == GLFW.GLFW_KEY_TAB && (keyEvent.modifiers() & GLFW.GLFW_MOD_SHIFT) != 0) {
+        if (keyEvent.key() == InputConstants.KEY_TAB && (keyEvent.modifiers() & InputConstants.MOD_SHIFT) != 0) {
             if (AutoAttackClient.handleShiftTabLogic(this)) return true;
-        } else if (keyEvent.key() == GLFW.GLFW_KEY_TAB && AutoAttackClient.handleTabLogic(this)) return true;
+        } else if (keyEvent.key() == InputConstants.KEY_TAB && AutoAttackClient.handleTabLogic(this)) return true;
         return super.keyPressed(keyEvent);
     }
 }
