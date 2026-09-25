@@ -1,11 +1,11 @@
 package me.johnadept.neoforge;
 
+import com.mojang.blaze3d.platform.InputConstants;
 import me.johnadept.AutoAttackClient;
 import me.johnadept.ModKeyBindings;
 import net.minecraft.client.KeyMapping;
 import net.minecraft.resources.Identifier;
 import net.neoforged.neoforge.client.event.RegisterKeyMappingsEvent;
-import org.lwjgl.glfw.GLFW;
 
 public class ModKeyBindingsImpl {
     public static void register(RegisterKeyMappingsEvent event) {
@@ -13,12 +13,14 @@ public class ModKeyBindingsImpl {
 
         ModKeyBindings.toggleAttack = new KeyMapping(
                 "key.auto_attack.toggleAttack",
-                GLFW.GLFW_KEY_UNKNOWN,
+                InputConstants.Type.KEYBOARD,
+                InputConstants.UNKNOWN.getValue(),
                 ModKeyBindings.CATEGORY_AUTO_ATTACK
         );
         ModKeyBindings.toggleRotation = new KeyMapping(
                 "key.auto_attack.toggleRotation",
-                GLFW.GLFW_KEY_UNKNOWN,
+                InputConstants.Type.KEYBOARD,
+                InputConstants.UNKNOWN.getValue(),
                 ModKeyBindings.CATEGORY_AUTO_ATTACK
         );
 
