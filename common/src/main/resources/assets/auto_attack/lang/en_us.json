@@ -17,6 +17,8 @@
   "menu.auto_attack.config.category.general": "General",
   "menu.auto_attack.config.enableMod": "Enable Mod",
   "menu.auto_attack.config.enableMod.tooltip": "Enables or disables all Auto Attack features. \nThis does not toggle the Attacker. \nUse the Attacker keybinding to enable or disable it.",
+  "menu.auto_attack.config.checkEntityDamageability": "Check Entity Damageability",
+  "menu.auto_attack.config.checkEntityDamageability.tooltip": "Only attack entities that can currently be damaged. \nPrevents unnecessary hits.",
   "menu.auto_attack.config.disableOnLowDurability": "Disable on Low Durability",
   "menu.auto_attack.config.durabilityThreshold": "Durability Threshold",
   "menu.auto_attack.config.durabilityThreshold.tooltip": "Disables attacking when weapon durability is at or below this value.",
