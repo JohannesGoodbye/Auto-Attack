@@ -14,6 +14,7 @@ import java.util.List;
 //TODO: Failsafe
 public class AutoAttackConfig {
     public boolean enableMod = true;
+    public boolean checkEntityDamageability = true;
     public boolean disableOnLowDurability = true;
     public int durabilityThreshold = 10;
     public boolean attackNonHostile = false;

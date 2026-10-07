@@ -88,7 +88,7 @@ public class Attacker {
 
         if (entity instanceof Player) return false;
         if (isShielding(player)) return false;
-        if (entity instanceof LivingEntity living && !canDamage(living)) return false;
+        if (config.checkEntityDamageability && entity instanceof LivingEntity living && !canDamage(living)) return false;
 
         Identifier id = BuiltInRegistries.ENTITY_TYPE.getKey(entity.getType());
         if (config.entityBlacklist.contains(id.toString())) return false;
