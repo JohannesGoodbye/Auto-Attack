@@ -42,6 +42,15 @@ public class ConfigScreen {
                 .build();
         general.addEntry(enable);
 
+        general.addEntry(entryBuilder
+                .startBooleanToggle(Component.translatable("menu.auto_attack.config.checkEntityDamageability"), config.checkEntityDamageability)
+                .setTooltip(Component.translatable("menu.auto_attack.config.checkEntityDamageability.tooltip"))
+                .setDefaultValue(defaultConfig.checkEntityDamageability)
+                .setDisplayRequirement(Requirement.isTrue(enable))
+                .setSaveConsumer(newValue -> config.checkEntityDamageability = newValue)
+                .build()
+        );
+
         BooleanListEntry attackNonHostile = entryBuilder
                 .startBooleanToggle(Component.translatable("menu.auto_attack.config.attackNonHostile"), config.attackNonHostile)
                 .setDefaultValue(defaultConfig.attackNonHostile)
