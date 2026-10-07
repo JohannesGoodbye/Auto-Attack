@@ -88,6 +88,7 @@ public class Attacker {
 
         if (entity instanceof Player) return false;
         if (isShielding(player)) return false;
+        if (entity instanceof LivingEntity living && !canDamage(living)) return false;
 
         Identifier id = BuiltInRegistries.ENTITY_TYPE.getKey(entity.getType());
         if (config.entityBlacklist.contains(id.toString())) return false;
@@ -98,6 +99,12 @@ public class Attacker {
         if (!config.attackNonHostile && !(entity instanceof Monster)) return false;
 
         return true;
+    }
+
+    private static boolean canDamage(LivingEntity entity) {
+        if (entity.isDeadOrDying() || !entity.isAlive()) return false;
+        // Client and server ticks are not in phase, so the server's value can be one tick ahead of what the client sees.
+        return entity.invulnerableTime < 10;
     }
 
     private static boolean isShielding(Player player) {
