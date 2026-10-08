@@ -115,7 +115,7 @@ public class Attacker {
     private static boolean canDamage(LivingEntity entity) {
         if (entity.isDeadOrDying() || !entity.isAlive()) return false;
         // Client and server ticks are not in phase, so the server's value can be one tick ahead of what the client sees.
-        return entity.invulnerableTime < 10;
+        return entity.damageCooldownTime < 10;
     }
 
     private static boolean isShielding(Player player) {
